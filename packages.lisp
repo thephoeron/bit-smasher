@@ -7,7 +7,20 @@
   (:nicknames #:bitsmash)
   (:use :cl :cl-user :ironclad)
   (:shadowing-import-from :cl-user #:null)
-  (:export #:*bit-smasher-version*))
+  (:export #:*bit-smasher-version*
+           #:hex->bits #:hex->octets #:hex->int
+           #:octets->hex #:octets->bits #:octets->int
+           #:int->hex #:int->octets #:int->bits
+           #:bits->hex #:bits->octets #:bits->int
+           #:bit-sum #:bit+
+           #:bit-difference #:bit-
+           #:bit-product #:bit*
+           #:bit-quotient #:bit/
+           #:bit-floor #:bit-ceiling
+           #:<< #:lshift
+           #:>> #:rshift
+           #:wide-bit-length #:min-bit-length
+           #:twos-complement-p))
 
 (in-package :bit-smasher)
 
