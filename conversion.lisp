@@ -45,11 +45,11 @@
 
 (defun bits->hex (data)
   "Return the hexadecimal string for bit-vector DATA."
-  (format nil "~X" (bit-array-integer-value-and-place data)))
+  (format nil "~X" (bit-vector-integer-value-and-place data)))
 
 (defun bits->int (data)
   "Return the integer value for bit-vector DATA."
-  (bit-array-integer-value-and-place data))
+  (bit-vector-integer-value-and-place data))
 
 (defun bits->octets (data order)
   "Return the octet-vector for bit-vector DATA, significant to ORDER."

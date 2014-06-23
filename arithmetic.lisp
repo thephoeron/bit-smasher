@@ -19,7 +19,7 @@
 (defun bit-difference (&rest rest)
   "Subtraction for bit-vectors.  Return result DIFFERENCE forced to absolute ceiling value."
   (let* ((intlist (loop for i in rest collect (bits->int i)))
-         (difference (apple #'- intlist)))
+         (difference (apply #'- intlist)))
     (int->bits (abs (ceiling difference)))))
 
 (defmacro bit- (&rest rest)
@@ -40,10 +40,10 @@
   "Division for bit-vectors.  Return results QUOTIENT and REMAINDER forced to absolute ceiling values."
   (let* ((intlist (loop for i in rest collect (bits->int i))))
     (multiple-value-bind (quotient remainder)
-        (floor (apply #'/ intlist)))
-    (values (int->bits (abs (ceiling quotient))) (int->bits (abs (ceiling remainder))))))
+        (floor (apply #'/ intlist))
+      (values (int->bits (abs (ceiling quotient))) (int->bits (abs (ceiling remainder)))))))
 
-(defun bit/ (&rest rest)
+(defmacro bit/ (&rest rest)
   "Shorthand for BIT-QUOTIENT function."
   `(bit-quotient ,@rest))
 
