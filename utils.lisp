@@ -33,7 +33,7 @@
         (t (error "Type of value N not recognized."))))
 
 (defun twos-complement-p (n)
-  "Test an integer, bit-vector, hex-string to see if it obeys the two's complement rule."
+  "Test a bit-vector, octet-vector, hex-string, or non-negative integer to see if it obeys the two's complement rule."
   (= (mod (min-bit-length n) 2) 0))
 
 ;; EOF

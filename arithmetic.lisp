@@ -59,7 +59,7 @@
          (the-ceiling (ceiling (apply #'/ intlist))))
     (int->bits (abs (ceiling the-ceiling)))))
 
-(defun << (n count)
+(defun lshift (n count)
   "Return a bit vector of N left-shifted by COUNT. N may be an integer, bit-vector, octet-vector, or hex-string."
   (cond ((typep n 'integer)
          (int->bits (ash n count)))
@@ -72,11 +72,11 @@
          (int->bits (ash (hex->int n) count)))
         (t (error "Type of value N not recognized."))))
 
-(defmacro lshift (n count)
-  "Alternate form of bit-shift function <<."
-  `(<< ,n ,count))
+(defmacro << (n count)
+  "Shorthand for bit-shift function LSHIFT."
+  `(lshift ,n ,count))
 
-(defun >> (n count)
+(defun rshift (n count)
   "Return a bit vector of N right-shifted by COUNT. N may be an integer, bit-vector, octet-vector, or hex-string."
   (cond ((typep n 'integer)
          (int->bits (ash n (- 0 count))))
@@ -89,8 +89,8 @@
          (int->bits (ash (hex->int n) (- 0 count))))
         (t (error "Type of value N not recognized."))))
 
-(defmacro rshift (n count)
-  "Alternate form of bit-shift function >>."
-  `(>> ,n ,count))
+(defmacro >> (n count)
+  "Shorthand for bit-shift function RSHIFT."
+  `(rshift ,n ,count))
 
 ;; EOF
