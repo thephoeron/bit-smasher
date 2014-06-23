@@ -21,5 +21,9 @@
                :cl-base64
                :ironclad)
   :components ((:file "packages")
+               (:file "core")
+               (:file "conversion")
+               (:file "arithmetic")
+               (:file "utils")
                (:file "bit-smasher")))
 ;; EOF
