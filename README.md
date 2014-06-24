@@ -19,10 +19,23 @@ BIT-SMASHER only handles the set of non-negative integers.  As such, arithmetic 
 The conversion functions allow you to convert universally between bit-vectors, octet-vectors, hexadecimal strings, and non-negative integers.
 
 ```lisp
+; universal type-casting style functions
+(bits<- "F0") => #*11110000
+(bits<- 240) => #*11110000
+(int<- #*11110000) => 240
+
+; manual conversions without type-checking
 (hex->bits "F0") => #*11110000
 (int->bits 10) => #*00001010
 (octets->bits (int->octets 244)) => #*11110100
 ; etc., etc...
+```
+
+Bit-vectors are returned zero-padded to the next full byte.
+
+```lisp
+(bits<- 255) => #*11111111
+(bits<- 256) => #*0000000100000000
 ```
 
 Arithmetic on bit-vectors can be achieved through the functions `bit-sum`, `bit-difference`, `bit-product`, `bit-quotient`, `bit-floor`, `bit-ceiling`, `lshift`, and `rshift`.  There are also the shorthand macros, `bit+`, `bit-`, `bit*`, `bit/`, `<<`, and `>>`.  As stated above, the bit-vector arithmetic functions return the absolute ceiling value of the operation.  So,
