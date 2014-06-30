@@ -44,11 +44,18 @@ Arithmetic on bit-vectors can be achieved through the functions `bit-sum`, `bit-
 (bit- #*0000 #*0010) => #*00000010 ; +2, not -2
 ```
 
-The measurement functions `wide-bit-length` and `min-bit-length` tell you the maximum and minimum number of bytes needed to store a value, respectively.  They operate on bit-vectors, octet-vectors, hexadecimal strings, and non-negative integers.
+The measurement functions `wide-bit-length` and `min-bit-length` tell you the maximum and minimum number of bits needed to store a value, respectively.  They operate on bit-vectors, octet-vectors, hexadecimal strings, and non-negative integers.
 
 ```lisp
 (wide-bit-length 256) => 16
 (min-bit-length 256) => 9
+```
+
+There is also the measurement function `byte-length` that returns the total number of bytes required to store an integer, bit-vector, or hexadecimal value; or the actual length of byte vector or simple byte array.
+
+```lisp
+(byte-length "A0FF") => 2
+(byte-length 65536) => 3
 ```
 
 In addition to the built-in CL predicate function, `bit-vector-p`, BIT-SMASHER adds the predicate function `twos-complement-p`, when you need to test the minimum bit length for the two's complement rule.  This is required where padding bit-vectors, octet-vectors, or hex-strings with leading zeros up to a set word-length is expected.
