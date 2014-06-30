@@ -11,10 +11,10 @@
   (:use :cl :cl-user :ironclad)
   (:shadowing-import-from :cl-user #:null)
   (:export #:*bit-smasher-version*
-           #:hex->bits #:hex->octets #:hex->int
-           #:octets->hex #:octets->bits #:octets->int
-           #:int->hex #:int->octets #:int->bits
-           #:bits->hex #:bits->octets #:bits->int
+           #:hex<- #:hex->bits #:hex->octets #:hex->int
+           #:octets<- #:octets->hex #:octets->bits #:octets->int
+           #:int<- #:int->hex #:int->octets #:int->bits
+           #:bits<- #:bits->hex #:bits->octets #:bits->int
            #:bit-sum #:bit+
            #:bit-difference #:bit-
            #:bit-product #:bit*
