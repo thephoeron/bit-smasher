@@ -6,6 +6,19 @@
 
 (in-package :bit-smasher)
 
+(defun byte-length (n)
+  "Return the number of bytes required to represent an integer, bit-vector, or hex-string value; or the actual length of an octet-vector, N."
+  (cond ((typep n 'integer)
+         (length (int->octets n)))
+        ((typep n 'bit-vector)
+         (length (bits->octets n)))
+        ((or (typep n '(vector (unsigned-byte 8)))
+             (typep n '(simple-array (unsigned-byte 8) (*))))
+         (length n))
+        ((typep n 'string)
+         (length (hex->octets n)))
+        (t (error "Type of value N not recognized."))))
+
 (defun wide-bit-length (n)
   "Return the maximum number of bits required to represent an integer, bit-vector, octet-vector, or hex-string value N."
   (cond ((typep n 'integer)

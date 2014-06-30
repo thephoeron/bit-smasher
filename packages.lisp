@@ -22,7 +22,7 @@
            #:bit-floor #:bit-ceiling
            #:<< #:lshift
            #:>> #:rshift
-           #:wide-bit-length #:min-bit-length
+           #:byte-length #:wide-bit-length #:min-bit-length
            #:twos-complement-p))
 
 (in-package :bit-smasher)
