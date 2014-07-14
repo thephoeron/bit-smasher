@@ -2,6 +2,8 @@
 
 Common Lisp library for handling bit vectors, bit vector arithmetic, and type conversions.
 
+**Update:** now available in Quicklisp as of July 2014 release.
+
 ### Usage Notes and Limitations
 
 This library was designed to complement the set of functions included in the Common Lisp specification for handling bit-vectors, by adding relevant lookup, conversion, arithmetic, measurement, and predicate functions.  For documentation and tutorials on the bit-vector functions included in the Common Lisp standard, please refer to:

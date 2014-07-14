@@ -12,7 +12,7 @@
 
 (in-package :bit-smasher-asd)
 
-(defvar *bit-smasher-version* "1.0.0")
+(defvar *bit-smasher-version* "1.0.1")
 
 (defsystem #:bit-smasher
   :serial t
