@@ -8,9 +8,9 @@
 
 (defun bit-sum (&rest rest)
   "Addition for bit-vectors.  Return result SUM forced to absolute ceiling value."
-  (let* ((intlist (loop for i in rest collect (bits->int i)))
+  (let* ((intlist (loop for i in rest collect (int<- i)))
          (sum (apply #'+ intlist)))
-    (int->bits (abs (ceiling sum)))))
+    (bits<- (abs (ceiling sum)))))
 
 (defmacro bit+ (&rest rest)
   "Shorthand for BIT-SUM function."

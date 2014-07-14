@@ -42,7 +42,7 @@
              (typep n '(simple-array (unsigned-byte 8) (*))))
          (integer-length (octets->int n)))
         ((typep n 'string)
-         (integer-length (hex->int n)))
+         (length n))
         (t (error "Type of value N not recognized."))))
 
 (defun twos-complement-p (n)
