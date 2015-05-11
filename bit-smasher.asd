@@ -16,7 +16,7 @@
 
 (defsystem #:bit-smasher
   :serial t
-  :description ""
+  :description "Bit vectors, bit vector arithmetic, and type conversions."
   :version #.*bit-smasher-version*
   :author "\"the Phoeron\" Colin J.E. Lupton <sysop@thephoeron.com>"
   :license "MIT"
