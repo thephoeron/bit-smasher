@@ -2,7 +2,7 @@
 
 Common Lisp library for handling bit vectors, bit vector arithmetic, and type conversions.
 
-**Update:** now available in Quicklisp as of July 2014 release.
+Available in Quicklisp as of July 2014 release.
 
 ### Usage Notes and Limitations
 
@@ -69,4 +69,4 @@ In addition to the built-in CL predicate function, `bit-vector-p`, BIT-SMASHER a
 
 ### License
 
-This project is released under the MIT License.  Please see bit-smasher/LICENSE for more information.
+Copyright &copy; 2014&ndash;2015, "the Phoeron" Colin J.E. Lupton. This project is released under the MIT License; please see `bit-smasher/LICENSE` for more information.
