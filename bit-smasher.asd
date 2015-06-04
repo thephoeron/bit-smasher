@@ -16,7 +16,7 @@
 
 (defsystem #:bit-smasher
   :serial t
-  :description "Bit vectors, bit vector arithmetic, and type conversions."
+  :description "Utility library for handling bit vectors, bit vector arithmetic, and universal integer type conversions between bit-vectors, byte-vectors, octals, decimals, and hexadecimal notation."
   :version #.*bit-smasher-version*
   :author "\"the Phoeron\" Colin J.E. Lupton <sysop@thephoeron.com>"
   :license "MIT"
