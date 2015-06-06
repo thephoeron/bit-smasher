@@ -1,5 +1,7 @@
 # BIT-SMASHER
 
+[![Build Status](https://travis-ci.org/thephoeron/bit-smasher.svg?branch=master)](https://travis-ci.org/thephoeron/bit-smasher)
+
 Common Lisp library for handling bit vectors, bit vector arithmetic, and type conversions.
 
 Available in Quicklisp as of July 2014 release.
