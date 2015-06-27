@@ -3,6 +3,7 @@
 [![Join the chat at https://gitter.im/thephoeron/bit-smasher](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/thephoeron/bit-smasher?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![Build Status](https://travis-ci.org/thephoeron/bit-smasher.svg?branch=master)](https://travis-ci.org/thephoeron/bit-smasher)
+[![Coverage Status](https://coveralls.io/repos/thephoeron/bit-smasher/badge.svg?branch=master)](https://coveralls.io/r/thephoeron/bit-smasher?branch=master)
 [![Available in Quicklisp](https://img.shields.io/badge/quicklisp-available-brightgreen.svg)](https://quicklisp.org/)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
