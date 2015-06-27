@@ -9,7 +9,7 @@
 
 ;; NOTE: To run this test file, execute `(asdf:test-system :bit-smasher)' in your Lisp.
 
-(plan 1)
+(plan 2)
 
 (deftest sanity-check
   (pass "PROVE is loaded and ready to go.")
@@ -21,6 +21,16 @@
   (is (* 2 2)
       4
       "Multiplication: (* 2 2) => 4."))
+
+;; Two's Complement Test
+
+(deftest twos-complement
+  (ok (twos-complement-p 0)
+      "0 is Two's Complement.")
+  (ok (not (twos-complement-p 1))
+      "1 is not Two's Complement.")
+  (ok (twos-complement-p 2)
+      "2 is Two's Complement."))
 
 (run-test-all)
 
