@@ -30,7 +30,19 @@
       "Integer to Hex-String conversion.")
   (is (bits<- (expt 10 64))
       #*000110000100111100000011111010010011111111111001111101001101101010100111100101111110110101101110001110001110110101100100101111110110101000011111000000010000000000000000000000000000000000000000000000000000000000000000
-      "Integer to Bit-Vector conversion."))
+      "Integer to Bit-Vector conversion.")
+  (ok (equalp (octets<- (expt 10 64))
+              #(24 79 3 233 63 249 244 218 167 151 237 110 56 237 100 191 106 31 1 0 0 0 0 0 0 0 0))
+      "Integer to Octets conversion.")
+  (is (int<- (bits<- (expt 10 64)))
+      (expt 10 64)
+      "Bit-Vector to Integer conversion.")
+  (ok (string-equal(hex<- (bits<- (expt 10 64)))
+                   (hex<- (expt 10 64)))
+      "Bit-Vector to Hex-String conversion.")
+  (ok (equalp (octets<- (bits<- (expt 10 64)))
+              (octets<- (expt 10 64)))
+      "Bit-Vector to Octets conversion."))
 
 ;; Two's Complement Test
 
