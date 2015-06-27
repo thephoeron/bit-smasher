@@ -14,7 +14,7 @@
 (deftest sanity-check
   (pass "PROVE is loaded and ready to go.")
   (ok (= 1 1)
-      "Numeric equality is valid.")
+      "Numeric equality: (= 1 1) => T.")
   (is (+ 1 1)
       2
       "Addition: (+ 1 1) => 2.")
