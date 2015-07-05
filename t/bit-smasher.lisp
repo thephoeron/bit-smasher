@@ -9,7 +9,7 @@
 
 ;; NOTE: To run this test file, execute `(asdf:test-system :bit-smasher)' in your Lisp.
 
-(plan 3)
+(plan 4)
 
 (deftest sanity-check
   (pass "PROVE is loaded and ready to go.")
@@ -21,6 +21,42 @@
   (is (* 2 2)
       4
       "Multiplication: (* 2 2) => 4."))
+
+;; Bit-Vector Arithmetic Test
+
+(deftest arithmetic
+  (is (bit+ #*0010 #*1000)
+      #*00001010
+      :test #'equal
+      "Sum of two bit-vectors.")
+  (is (bit- #*1000 #*0010)
+      #*00000110
+      :test #'equal
+      "Difference of two bit-vectors.")
+  (is (bit* #*1000 #*0010)
+      #*00010000
+      :test #'equal
+      "Product of two bit-vectors.")
+  (is (bit/ #*1000 #*0010)
+      #*00000100
+      :test #'equal
+      "Quotient of two bit-vectors.")
+  (is (bit-floor #*1000 #*0010)
+      #*00000100
+      :test #'equal
+      "Floor-Division of two bit-vectors.")
+  (is (bit-ceiling #*1000 #*0010)
+      #*00000100
+      :test #'equal
+      "Ceiling-Division of two bit-vectors.")
+  (is (<< #*0010 2)
+      #*00001000
+      :test #'equal
+      "Left-shift Bit-Vector by two bits.")
+  (is (>> #*1000 2)
+      #*00000010
+      :test #'equal
+      "Right-shift Bit-Vector by two bits."))
 
 ;; Conversion test
 
