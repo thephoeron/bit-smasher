@@ -77,7 +77,7 @@
         ((typep data 'integer)
          (int->octets data))
         ((typep data 'bit-vector)
-         (bits->octets data (length data)))
+         (bits->octets data))
         ((or (typep data '(vector (unsigned-byte 8)))
              (typep data '(simple-array (unsigned-byte 8) (*))))
          data)
