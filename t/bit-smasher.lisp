@@ -20,7 +20,10 @@
       "Addition: (+ 1 1) => 2.")
   (is (* 2 2)
       4
-      "Multiplication: (* 2 2) => 4."))
+      "Multiplication: (* 2 2) => 4.")
+  (is (mod (+ 10 2) 10)
+      0
+      "Modulus: (mod (+ 10 2) 10) => 0."))
 
 ;; Bit-Vector Arithmetic Test
 
