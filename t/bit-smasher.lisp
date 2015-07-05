@@ -9,7 +9,7 @@
 
 ;; NOTE: To run this test file, execute `(asdf:test-system :bit-smasher)' in your Lisp.
 
-(plan 4)
+(plan 5)
 
 (deftest sanity-check
   (pass "PROVE is loaded and ready to go.")
@@ -73,8 +73,8 @@
   (is (int<- (bits<- (expt 10 64)))
       (expt 10 64)
       "Bit-Vector to Integer conversion.")
-  (ok (string-equal(hex<- (bits<- (expt 10 64)))
-                   (hex<- (expt 10 64)))
+  (ok (string-equal (hex<- (bits<- (expt 10 64)))
+                    (hex<- (expt 10 64)))
       "Bit-Vector to Hex-String conversion.")
   (ok (equalp (octets<- (bits<- (expt 10 64)))
               (octets<- (expt 10 64)))
@@ -89,6 +89,32 @@
       "1 is not Two's Complement.")
   (ok (twos-complement-p 2)
       "2 is Two's Complement."))
+
+(deftest bit-length
+  (is (byte-length 255)
+      1
+      "Byte-length of integer.")
+  (is (byte-length "FF")
+      1
+      "Byte-length of Hex-String.")
+  (is (byte-length #*11111111)
+      1
+      "Byte-length of Bit-Vector.")
+  (is (byte-length (octets<- 255))
+      1
+      "Byte-length of Octets.")
+  (is (wide-bit-length 255)
+      8
+      "Wide Bit-Length of Integer.")
+  (is (wide-bit-length "FF")
+      8
+      "Wide Bit-Length of Hex-String.")
+  (is (wide-bit-length #*11111111)
+      8
+      "Wide Bit-Length of Bit-Vector.")
+  (is (wide-bit-length (octets<- 255))
+      8
+      "Wide Bit-Length of Octets."))
 
 (run-test-all)
 
