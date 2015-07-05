@@ -22,8 +22,8 @@
       4
       "Multiplication: (* 2 2) => 4.")
   (is (mod (+ 10 2) 10)
-      0
-      "Modulus: (mod (+ 10 2) 10) => 0."))
+      2
+      "Modulus: (mod (+ 10 2) 10) => 2."))
 
 ;; Bit-Vector Arithmetic Test
 
