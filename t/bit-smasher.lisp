@@ -106,6 +106,9 @@
   (is (byte-length (octets<- 255))
       1
       "Byte-length of Octets.")
+  (is-error (byte-length #(255))
+            'simple-error
+            "Byte-Length error triggered: type of N not recognized.")
   (is (wide-bit-length 255)
       8
       "Wide Bit-Length of Integer.")
@@ -117,7 +120,25 @@
       "Wide Bit-Length of Bit-Vector.")
   (is (wide-bit-length (octets<- 255))
       8
-      "Wide Bit-Length of Octets."))
+      "Wide Bit-Length of Octets.")
+  (is-error (wide-bit-length #(255))
+            'simple-error
+            "Wide Bit-Length error triggered: type of N not recognized.")
+  (is (min-bit-length 255)
+      8
+      "Minimum Bit-Length of Integer.")
+  (is (min-bit-length "FF")
+      8
+      "Minimum Bit-Length of Hex-String.")
+  (is (min-bit-length #*11111111)
+      8
+      "Minimum Bit-Length of Bit-Vector.")
+  (is (min-bit-length (octets<- 255))
+      8
+      "Minimum Bit-Length of Octets.")
+  (is-error (min-bit-length #(255))
+            'simple-error
+            "Minimum Bit-Length error triggered: type of N not recognized."))
 
 (run-test-all)
 
