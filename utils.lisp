@@ -22,14 +22,14 @@
 (defun wide-bit-length (n)
   "Return the maximum number of bits required to represent an integer, bit-vector, octet-vector, or hex-string value N."
   (cond ((typep n 'integer)
-         (length (int->bits n)))
+         (length (bits<- n)))
         ((typep n 'bit-vector)
-         (length (int->bits (bits->int n))))
+         (length (bits<- (int<- n))))
         ((or (typep n '(vector (unsigned-byte 8)))
              (typep n '(simple-array (unsigned-byte 8) (*))))
-         (length (octets->bits n)))
+         (length (bits<- n)))
         ((typep n 'string)
-         (length (hex->bits n)))
+         (length (bits<- n)))
         (t (error "Type of value N not recognized."))))
 
 (defun min-bit-length (n)
