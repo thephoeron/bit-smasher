@@ -56,10 +56,40 @@
       #*00001000
       :test #'equal
       "Left-shift Bit-Vector by two bits.")
+  (is (<< "FF" 2)
+      #*0000001111111100
+      :test #'equal
+      "Left-shift Hex-String by two bits.")
+  (is (<< (octets<- 255) 2)
+      #*0000001111111100
+      :test #'equal
+      "Left-shift Octets by two bits.")
+  (is (<< 255 2)
+      #*0000001111111100
+      :test #'equal
+      "Left-shift Integer by two bits.")
+  (is-error (<< #(255) 2)
+            'simple-error
+            "LEFT-SHIFT error triggered: type of N not recognized.")
   (is (>> #*1000 2)
       #*00000010
       :test #'equal
-      "Right-shift Bit-Vector by two bits."))
+      "Right-shift Bit-Vector by two bits.")
+  (is (>> "FF" 2)
+      #*00111111
+      :test #'equal
+      "Right-shift Hex-String by two bits.")
+  (is (>> (octets<- 255) 2)
+      #*00111111
+      :test #'equal
+      "Right-shift Octets by two bits.")
+  (is (>> 255 2)
+      #*00111111
+      :test #'equal
+      "Right-shift Integer by two bits.")
+  (is-error (>> #(255) 2)
+            'simple-error
+            "RIGHT-SHIFT error triggered: type of N not recognized."))
 
 ;; Conversion test
 
