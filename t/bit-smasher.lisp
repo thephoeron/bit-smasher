@@ -64,18 +64,82 @@
 ;; Conversion test
 
 (deftest conversion
+  (is (hex<- 0)
+      "00"
+      "Zero to Hex-String conversion.")
   (is (hex<- (expt 10 64))
       "184f03e93ff9f4daa797ed6e38ed64bf6a1f010000000000000000"
       "Integer to Hex-String conversion.")
+  (is (hex<- (octets<- 255))
+      "FF"
+      :test #'equalp
+      "Octets to Hex-String conversion.")
+  (is (hex<- "FF")
+      "FF"
+      "Hex-String self-check.")
+  (is-error (hex<- #(0))
+            'simple-error
+            "HEX<- error triggered: type of N not recognized.")
+  (is (bits<- 0)
+      #*00000000
+      :test #'equal
+      "Zero to Bit-Vector conversion.")
   (is (bits<- (expt 10 64))
       #*000110000100111100000011111010010011111111111001111101001101101010100111100101111110110101101110001110001110110101100100101111110110101000011111000000010000000000000000000000000000000000000000000000000000000000000000
       "Integer to Bit-Vector conversion.")
-  (ok (equalp (octets<- (expt 10 64))
-              #(24 79 3 233 63 249 244 218 167 151 237 110 56 237 100 191 106 31 1 0 0 0 0 0 0 0 0))
+  (is (bits<- "FF")
+      #*11111111
+      "Hex-String to Bit-Vector conversion.")
+  (is (bits<- (octets<- "FF"))
+      #*11111111
+      "Octets to Bit-Vector conversion.")
+  (is (bits<- #*1000)
+      #*1000
+      "Bit-Vector self-check.")
+  (is-error (bits<- #(0))
+            'simple-error
+            "BITS<- error triggered: type of N not recognized.")
+  (is (octets<- (expt 10 64))
+      #(24 79 3 233 63 249 244 218 167 151 237 110 56 237 100 191 106 31 1 0 0 0 0 0 0 0 0)
+      :test #'equalp
       "Integer to Octets conversion.")
+  (is (octets<- 0)
+      #(0)
+      :test #'equalp
+      "Zero to Octets conversion.")
+  (is (octets<- #*11111111)
+      #(255)
+      :test #'equalp
+      "Bit-Vector to Octets conversion.")
+  (is (octets<- "FF")
+      #(255)
+      :test #'equalp
+      "Hex-String to Octets conversion.")
+  (is (octets<- (octets<- 255))
+      #(255)
+      :test #'equalp
+      "Octets self-check.")
+  (is-error (octets<- #(0))
+            'simple-error
+            "OCTETS<- error triggered: type of N not recognized.")
   (is (int<- (bits<- (expt 10 64)))
       (expt 10 64)
       "Bit-Vector to Integer conversion.")
+  (is (int<- 0)
+      0
+      "Zero integer conversion test.")
+  (is (int<- "FF")
+      255
+      "Hex-String to Integer conversion.")
+  (is (int<- (octets<- 255))
+      255
+      "Octets to Integer conversion.")
+  (is (int<- 255)
+      255
+      "Integer self-check.")
+  (is-error (int<- #(0))
+            'simple-error
+            "INT<- error triggered: type of N not recognized.")
   (ok (string-equal (hex<- (bits<- (expt 10 64)))
                     (hex<- (expt 10 64)))
       "Bit-Vector to Hex-String conversion.")
