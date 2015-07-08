@@ -9,6 +9,13 @@ env:
     - LISP=clisp
     - LISP=ecl
     - LISP=abcl
+    - LISP=allegro
+    - LISP=cmucl
+
+matrix:
+  allow_failures:
+    - env: LISP=allegro
+    - env: LISP=cmucl
 
 install:
   - if [ -x ./install.sh ] && head -2 ./install.sh | grep '^# cl-travis' > /dev/null;
