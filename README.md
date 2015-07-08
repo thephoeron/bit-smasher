@@ -25,7 +25,7 @@ BIT-SMASHER is known to compile and pass all tests with 100% code coverage on th
 It *does not build* on:
 - CMUCL
 
-I *has not been tested* on:
+It *has not been tested* on:
 - LispWorks
 - Clasp
 - or other available Common Lisp implementations
