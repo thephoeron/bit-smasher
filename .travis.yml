@@ -6,9 +6,9 @@ env:
   matrix:
     - LISP=sbcl COVERALLS=true
     - LISP=ccl
-    # - LISP=clisp
-    # - LISP=ecl
-    # - LISP=abcl
+    - LISP=clisp
+    - LISP=ecl
+    - LISP=abcl
 
 install:
   - if [ -x ./install.sh ] && head -2 ./install.sh | grep '^# cl-travis' > /dev/null;
@@ -21,17 +21,22 @@ install:
   - git clone https://github.com/fukamachi/cl-coveralls ~/lisp/cl-coveralls
 
 script:
-  - cl -l prove -l cl-coveralls
+  - cl -l prove
        -e '(in-package :cl-user)'
+       -e '#+sbcl (ql:quickload :cl-coveralls)'
        -e '(ql:quickload :bit-smasher)'
        -e '(setf prove:*debug-on-error* t)'
        -e '(setf *debugger-hook*
                  (lambda (c h)
                    (declare (ignore c h))
                    (uiop:quit -1)))'
-       -e '(coveralls:with-coveralls (:exclude (list "t"))
+       -e '#+sbcl
+           (coveralls:with-coveralls (:exclude (list "t"))
              (or (prove:run :bit-smasher-test)
                  (uiop:quit -1)))'
+       -e '#-sbcl
+           (or (prove:run :bit-smasher-test)
+               (uiop:quit -1))'
 
 notifications:
   webhooks:
