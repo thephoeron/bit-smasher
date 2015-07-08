@@ -11,6 +11,25 @@ Common Lisp library for handling bit vectors, bit vector arithmetic, and type co
 
 Available in Quicklisp as of July 2014 release.
 
+### Supported Platforms
+
+BIT-SMASHER is known to compile and pass all tests with 100% code coverage on the latest versions of the following Lisp implementations:
+
+- SBCL
+- Clozure CL
+- CLISP
+- ECL
+- ABCL
+- Allegro CL
+
+It *does not build* on:
+- CMUCL
+
+I *has not been tested* on:
+- LispWorks
+- Clasp
+- or other available Common Lisp implementations
+
 ### Usage Notes and Limitations
 
 This library was designed to complement the set of functions included in the Common Lisp specification for handling bit-vectors, by adding relevant lookup, conversion, arithmetic, measurement, and predicate functions.  For documentation and tutorials on the bit-vector functions included in the Common Lisp standard, please refer to:
