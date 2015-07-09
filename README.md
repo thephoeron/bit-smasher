@@ -13,7 +13,7 @@ Available in Quicklisp as of July 2014 release.
 
 ### Supported Platforms
 
-BIT-SMASHER is known to compile and pass all tests with 100% code coverage on the latest versions of the following Lisp implementations:
+BIT-SMASHER is known to compile and pass all tests with 100% code coverage on the latest 64-bit versions of the following Lisp implementations:
 
 - SBCL
 - Clozure CL
