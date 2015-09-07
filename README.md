@@ -10,6 +10,8 @@ Common Lisp library for handling bit vectors, bit vector arithmetic, and type co
 
 Available in Quicklisp as of July 2014 release.
 
+Documentation available at: http://thephoeron.viewdocs.io/bit-smasher/
+
 ### Supported Platforms
 
 BIT-SMASHER is known to compile and pass all tests with 100% code coverage on the latest 64-bit versions of the following Lisp implementations:
