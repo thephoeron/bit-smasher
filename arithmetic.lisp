@@ -18,9 +18,9 @@
 
 (defun bit-difference (&rest rest)
   "Subtraction for bit-vectors.  Return result DIFFERENCE forced to absolute ceiling value."
-  (let* ((intlist (loop for i in rest collect (bits->int i)))
+  (let* ((intlist (loop for i in rest collect (int<- i)))
          (difference (apply #'- intlist)))
-    (int->bits (abs (ceiling difference)))))
+    (bits<- (abs (ceiling difference)))))
 
 (defmacro bit- (&rest rest)
   "Shorthand for BIT-DIFFERENCE function."
@@ -28,9 +28,9 @@
 
 (defun bit-product (&rest rest)
   "Multiplication for bit-vectors.  Return result PRODUCT forced to absolute ceiling value."
-  (let* ((intlist (loop for i in rest collect (bits->int i)))
+  (let* ((intlist (loop for i in rest collect (int<- i)))
          (prod (apply #'* intlist)))
-    (int->bits (abs (ceiling prod)))))
+    (bits<- (abs (ceiling prod)))))
 
 (defmacro bit* (&rest rest)
   "Shorthand for BIT-PRODUCT function."
@@ -38,10 +38,10 @@
 
 (defun bit-quotient (&rest rest)
   "Division for bit-vectors.  Return results QUOTIENT and REMAINDER forced to absolute ceiling values."
-  (let* ((intlist (loop for i in rest collect (bits->int i))))
+  (let* ((intlist (loop for i in rest collect (int<- i))))
     (multiple-value-bind (quotient remainder)
         (floor (apply #'/ intlist))
-      (values (int->bits (abs (ceiling quotient))) (int->bits (abs (ceiling remainder)))))))
+      (values (bits<- (abs (ceiling quotient))) (bits<- (abs (ceiling remainder)))))))
 
 (defmacro bit/ (&rest rest)
   "Shorthand for BIT-QUOTIENT function."
@@ -49,27 +49,27 @@
 
 (defun bit-floor (&rest rest)
   "Floor division for bit-vectors.  Return result FLOOR forced to absolute ceiling value."
-  (let* ((intlist (loop for i in rest collect (bits->int i)))
+  (let* ((intlist (loop for i in rest collect (int<- i)))
          (the-floor (floor (apply #'/ intlist))))
-    (int->bits (abs (ceiling the-floor)))))
+    (bits<- (abs (ceiling the-floor)))))
 
 (defun bit-ceiling (&rest rest)
   "Ceiling division for bit-vectors.  Return result CEILING forced to absolute ceiling value."
-  (let* ((intlist (loop for i in rest collect (bits->int i)))
+  (let* ((intlist (loop for i in rest collect (int<- i)))
          (the-ceiling (ceiling (apply #'/ intlist))))
-    (int->bits (abs (ceiling the-ceiling)))))
+    (bits<- (abs (ceiling the-ceiling)))))
 
 (defun lshift (n count)
   "Return a bit vector of N left-shifted by COUNT. N may be an integer, bit-vector, octet-vector, or hex-string."
   (cond ((typep n 'integer)
-         (int->bits (ash n count)))
+         (bits<- (ash n count)))
         ((typep n 'bit-vector)
-         (int->bits (ash (bits->int n) count)))
+         (bits<- (ash (int<- n) count)))
         ((or (typep n '(vector (unsigned-byte 8)))
              (typep n '(simple-array (unsigned-byte 8) (*))))
-         (int->bits (ash (octets->int n) count)))
+         (bits<- (ash (int<- n) count)))
         ((typep n 'string)
-         (int->bits (ash (hex->int n) count)))
+         (bits<- (ash (int<- n) count)))
         (t (error "Type of value N not recognized."))))
 
 (defmacro << (n count)
@@ -79,14 +79,14 @@
 (defun rshift (n count)
   "Return a bit vector of N right-shifted by COUNT. N may be an integer, bit-vector, octet-vector, or hex-string."
   (cond ((typep n 'integer)
-         (int->bits (ash n (- 0 count))))
+         (bits<- (ash n (- count))))
         ((typep n 'bit-vector)
-         (int->bits (ash (bits->int n) (- 0 count))))
+         (bits<- (ash (int<- n) (- count))))
         ((or (typep n '(vector (unsigned-byte 8)))
              (typep n '(simple-array (unsigned-byte 8) (*))))
-         (int->bits (ash (octets->int n) (- 0 count))))
+         (bits<- (ash (int<- n) (- count))))
         ((typep n 'string)
-         (int->bits (ash (hex->int n) (- 0 count))))
+         (bits<- (ash (int<- n) (- count))))
         (t (error "Type of value N not recognized."))))
 
 (defmacro >> (n count)
