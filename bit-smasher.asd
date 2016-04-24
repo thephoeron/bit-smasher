@@ -27,6 +27,5 @@
                (:file "conversion")
                (:file "arithmetic")
                (:file "aliases")
-               (:file "utils")
-               (:file "bit-smasher")))
+               (:file "utils")))
 ;; EOF
