@@ -5,6 +5,18 @@
 
 (in-package :bit-smasher)
 
+;; open coding allows SBCL to remove unsatisfiable branches; Also detects type mismatch in compile time
+(declaim (inline hex<- octets<- int<- bits<-
+                 hex->bits
+                 hex->octets
+                 octets->hex
+                 octets->bits
+                 int->hex
+                 int->bits
+                 bits->hex
+                 bits->int
+                 bits->octets))
+
 (defun hex->bits (x)
   "Return the bit-vector for hexadecimal string X."
   (let ((binlist (loop for c across x collect (hex-to-bit-lookup/unsafe c))))
@@ -53,7 +65,9 @@
 (defun bits->octets (data)
   "Return the octet-vector for bit-vector DATA, significant to ORDER."
   (ironclad:integer-to-octets (bits->int data)))
+
 ;;;; generalized
+
 (defun hex<- (data)
   (etypecase data
     ((integer 0 0) "00")

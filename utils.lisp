@@ -5,6 +5,9 @@
 
 (in-package :bit-smasher)
 
+;; open coding allows SBCL to remove unsatisfiable branches; Also detects type mismatch in compile time
+(declaim (inline byte-length wide-bit-length min-bit-length twos-complement-p))
+
 (defun byte-length (n)
   "Return the number of bytes required to represent an integer, bit-vector, or hex-string value; or the actual length of an octet-vector, N."
   (etypecase n
