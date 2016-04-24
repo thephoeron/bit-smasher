@@ -7,7 +7,7 @@
 
 (defun hex->bits (x)
   "Return the bit-vector for hexadecimal string X."
-  (let ((binlist (loop for c across x collect (hex-to-bit-lookup c))))
+  (let ((binlist (loop for c across x collect (hex-to-bit-lookup/unsafe c))))
     (apply #'concatenate 'bit-vector binlist)))
 
 (defun hex->octets (x)

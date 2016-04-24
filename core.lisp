@@ -5,26 +5,35 @@
 
 (in-package :bit-smasher)
 
-(defvar *bit-map* '((#\0 . #*0000)
-                    (#\1 . #*0001)
-                    (#\2 . #*0010)
-                    (#\3 . #*0011)
-                    (#\4 . #*0100)
-                    (#\5 . #*0101)
-                    (#\6 . #*0110)
-                    (#\7 . #*0111)
-                    (#\8 . #*1000)
-                    (#\9 . #*1001)
-                    (#\A . #*1010)
-                    (#\B . #*1011)
-                    (#\C . #*1100)
-                    (#\D . #*1101)
-                    (#\E . #*1110)
-                    (#\F . #*1111)))
+(defvar *bit-map* #(#*0000
+                    #*0001
+                    #*0010
+                    #*0011
+                    #*0100
+                    #*0101
+                    #*0110
+                    #*0111
+                    #*1000
+                    #*1001
+                    #*1010
+                    #*1011
+                    #*1100
+                    #*1101
+                    #*1110
+                    #*1111))
+
+(defun hex-to-bit-lookup/unsafe (char)
+  "Return the bit vector associated with a hex-value character CHAR from *bit-map*."
+  (cond ((char<= #\0 char #\9)
+         (aref *bit-map* (- (char-code char) #.(char-code #\0))))
+        ((char<= #\a char #\f)
+         (aref *bit-map* (+ 10 (- (char-code char) #.(char-code #\a)))))
+        ((char<= #\A char #\F)
+         (aref *bit-map* (+ 10 (- (char-code char) #.(char-code #\A)))))))
 
 (defun hex-to-bit-lookup (char)
   "Return the bit vector associated with a hex-value character CHAR from *bit-map*."
-  (cdr (assoc char *bit-map* :test #'char-equal)))
+  (copy-seq (hex-to-bit-lookup/unsafe char)))
 
 ;; from comp.lang.lisp
 (defun bit-vector-integer-value-and-place (bit-vector)
