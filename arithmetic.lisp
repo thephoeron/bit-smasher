@@ -44,28 +44,28 @@
 
 (defun lshift (n count)
   "Return a bit vector of N left-shifted by COUNT. N may be an integer, bit-vector, octet-vector, or hex-string."
-  (cond ((typep n 'integer)
-         (bits<- (ash n count)))
-        ((typep n 'bit-vector)
-         (bits<- (ash (int<- n) count)))
-        ((or (typep n '(vector (unsigned-byte 8)))
-             (typep n '(simple-array (unsigned-byte 8) (*))))
-         (bits<- (ash (int<- n) count)))
-        ((typep n 'string)
-         (bits<- (ash (int<- n) count)))
-        (t (error "Type of value N not recognized."))))
+  (etypecase n
+    (integer
+     (bits<- (ash n count)))
+    (bit-vector
+     (bits<- (ash (int<- n) count)))
+    ((or (vector (unsigned-byte 8))
+         (simple-array (unsigned-byte 8) (*)))
+     (bits<- (ash (int<- n) count)))
+    (string
+     (bits<- (ash (int<- n) count)))))
 
 (defun rshift (n count)
   "Return a bit vector of N right-shifted by COUNT. N may be an integer, bit-vector, octet-vector, or hex-string."
-  (cond ((typep n 'integer)
-         (bits<- (ash n (- count))))
-        ((typep n 'bit-vector)
-         (bits<- (ash (int<- n) (- count))))
-        ((or (typep n '(vector (unsigned-byte 8)))
-             (typep n '(simple-array (unsigned-byte 8) (*))))
-         (bits<- (ash (int<- n) (- count))))
-        ((typep n 'string)
-         (bits<- (ash (int<- n) (- count))))
-        (t (error "Type of value N not recognized."))))
+  (etypecase n
+    (integer
+     (bits<- (ash n (- count))))
+    (bit-vector
+     (bits<- (ash (int<- n) (- count))))
+    ((or (vector (unsigned-byte 8))
+         (simple-array (unsigned-byte 8) (*)))
+     (bits<- (ash (int<- n) (- count))))
+    (string
+     (bits<- (ash (int<- n) (- count))))))
 
 ;; EOF
