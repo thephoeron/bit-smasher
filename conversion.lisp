@@ -52,7 +52,7 @@
   (bit-vector-integer-value-and-place data))
 
 (defun bits->octets (data)
-  "Return the octet-vector for bit-vector DATA, significant to ORDER."
+  "Return the octet-vector for bit-vector DATA."
   (ironclad:integer-to-octets (bits->int data)))
 
 (defun hex<- (data)
