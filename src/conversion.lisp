@@ -19,8 +19,17 @@
 
 (defun hex->bits (x)
   "Return the bit-vector for hexadecimal string X."
-  (let ((binlist (loop for c across x collect (hex-to-bit-lookup/unsafe c))))
-    (apply #'concatenate 'bit-vector binlist)))
+  (let ((result (make-array (* 4 (length x)) :element-type 'bit)))
+    (declare (type (simple-array bit) result)
+             (type string x))
+    (loop for c across x
+          for i from 0 by 4
+          for bv = (hex-to-bit-lookup/unsafe c)
+          do
+       (locally
+           (declare (optimize (safety 0)))
+         (replace result bv :start1 i)))
+    result))
 
 (defun hex->octets (x)
   "Return the octet-vector for hexadecimal string X."
