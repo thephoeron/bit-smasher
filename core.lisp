@@ -53,4 +53,3 @@ SLOW!! Consult Hackers-Delight"
     (values (reduce #'+ (reverse bit-vector) :key (lambda (digit) (ash digit (incf place))))
             (incf place))))
 
-;; EOF

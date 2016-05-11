@@ -29,4 +29,3 @@
                (:file "aliases")
                (:file "utils"))
   :in-order-to ((test-op (test-op :bit-smasher-test))))
-;; EOF
