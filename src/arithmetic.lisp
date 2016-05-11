@@ -5,6 +5,14 @@
 
 (in-package :bit-smasher)
 
+;; from comp.lang.lisp
+(defun bit-vector-integer-value-and-place (bit-vector)
+  "Returns the bits of BIT-VECTOR as an integer as the primary value, number of bits as the secondary value.
+SLOW!! Consult Hackers-Delight"
+  (let ((place -1))
+    (values (reduce #'+ (reverse bit-vector) :key (lambda (digit) (ash digit (incf place))))
+            (incf place))))
+
 (defun bit-sum (&rest rest)
   "Addition for bit-vectors.  Return result SUM forced to absolute ceiling value."
   (let* ((intlist (loop for i in rest collect (int<- i)))
