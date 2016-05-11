@@ -17,17 +17,17 @@ hexadecimal digits into a byte array."
                       (hexchar->int (char string (1+ j)))))
           finally (return key))))
 
-(defun byte-array-to-hex-string (vector &aux (start 0) (end (length vector)))
+(defun byte-array-to-hex-string (vector)
   "Return a string containing the hexadecimal representation of the
 subsequence of VECTOR between START and END.  ELEMENT-TYPE controls
 the element-type of the returned string."
   (declare (type (vector (unsigned-byte 8)) vector)
            (optimize (speed 3) (safety 1)))
-  (let* ((length (- end start))
+  (let* ((length (length vector))
          (hexdigits #.(coerce "0123456789abcdef" 'simple-base-string)))
     (loop with string = (make-string (* length 2) :element-type 'base-char)
-       for i from start below end
-       for j from 0 below (* length 2) by 2
+       for i from 0 below length
+       for j from 0 by 2
        do (let ((byte (aref vector i)))
             (declare (optimize (safety 0)))
             (setf (aref string j)
