@@ -69,7 +69,7 @@
       :test #'equal
       "Left-shift Integer by two bits.")
   (is-error (<< #(255) 2)
-            'simple-error
+            'type-error
             "LEFT-SHIFT error triggered: type of N not recognized.")
   (is (>> #*1000 2)
       #*00000010
@@ -88,7 +88,7 @@
       :test #'equal
       "Right-shift Integer by two bits.")
   (is-error (>> #(255) 2)
-            'simple-error
+            'type-error
             "RIGHT-SHIFT error triggered: type of N not recognized."))
 
 ;; Conversion test
@@ -108,7 +108,7 @@
       "FF"
       "Hex-String self-check.")
   (is-error (hex<- #(0))
-            'simple-error
+            'type-error
             "HEX<- error triggered: type of N not recognized.")
   (is (bits<- 0)
       #*00000000
@@ -127,7 +127,7 @@
       #*1000
       "Bit-Vector self-check.")
   (is-error (bits<- #(0))
-            'simple-error
+            'type-error
             "BITS<- error triggered: type of N not recognized.")
   (is (octets<- (expt 10 64))
       #(24 79 3 233 63 249 244 218 167 151 237 110 56 237 100 191 106 31 1 0 0 0 0 0 0 0 0)
@@ -150,7 +150,7 @@
       :test #'equalp
       "Octets self-check.")
   (is-error (octets<- #(0))
-            'simple-error
+            'type-error
             "OCTETS<- error triggered: type of N not recognized.")
   (is (int<- (bits<- (expt 10 64)))
       (expt 10 64)
@@ -168,7 +168,7 @@
       255
       "Integer self-check.")
   (is-error (int<- #(0))
-            'simple-error
+            'type-error
             "INT<- error triggered: type of N not recognized.")
   (ok (string-equal (hex<- (bits<- (expt 10 64)))
                     (hex<- (expt 10 64)))
@@ -201,7 +201,7 @@
       1
       "Byte-length of Octets.")
   (is-error (byte-length #(255))
-            'simple-error
+            'type-error
             "Byte-Length error triggered: type of N not recognized.")
   (is (wide-bit-length 255)
       8
@@ -216,7 +216,7 @@
       8
       "Wide Bit-Length of Octets.")
   (is-error (wide-bit-length #(255))
-            'simple-error
+            'type-error
             "Wide Bit-Length error triggered: type of N not recognized.")
   (is (min-bit-length 255)
       8
@@ -231,7 +231,7 @@
       8
       "Minimum Bit-Length of Octets.")
   (is-error (min-bit-length #(255))
-            'simple-error
+            'type-error
             "Minimum Bit-Length error triggered: type of N not recognized."))
 
 (run-test-all)

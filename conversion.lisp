@@ -1,4 +1,3 @@
-;;;; -*- Mode: LISP; Syntax: COMMON-LISP; Package: BIT-SMASHER; Base: 10 -*-
 ;;;; conversion.lisp
 
 ;;;; Copyright (c) 2014--2015, "the Phoeron" Colin J.E. Lupton <//thephoeron.com>
@@ -6,9 +5,21 @@
 
 (in-package :bit-smasher)
 
+;; open coding allows SBCL to remove unsatisfiable branches; Also detects type mismatch in compile time
+(declaim (inline hex<- octets<- int<- bits<-
+                 hex->bits
+                 hex->octets
+                 octets->hex
+                 octets->bits
+                 int->hex
+                 int->bits
+                 bits->hex
+                 bits->int
+                 bits->octets))
+
 (defun hex->bits (x)
   "Return the bit-vector for hexadecimal string X."
-  (let ((binlist (loop for c across x collect (hex-to-bit-lookup c))))
+  (let ((binlist (loop for c across x collect (hex-to-bit-lookup/unsafe c))))
     (apply #'concatenate 'bit-vector binlist)))
 
 (defun hex->octets (x)
@@ -55,61 +66,57 @@
   "Return the octet-vector for bit-vector DATA."
   (ironclad:integer-to-octets (bits->int data)))
 
+;;;; generalized
+
 (defun hex<- (data)
-  (cond ((and (typep data 'integer)
-              (= data 0))
-         "00")
-        ((typep data 'integer)
-         (int->hex data))
-        ((typep data 'bit-vector)
-         (bits->hex data))
-        ((or (typep data '(vector (unsigned-byte 8)))
-             (typep data '(simple-array (unsigned-byte 8) (*))))
-         (octets->hex data))
-        ((typep data 'string)
-         data)
-        (t (error "Type of value N not recognized."))))
+  (etypecase data
+    ((integer 0 0) "00")
+    (integer    (int->hex data))
+    (bit-vector (bits->hex data))
+    ((or (vector (unsigned-byte 8))
+         (simple-array (unsigned-byte 8) (*)))
+     (octets->hex data))
+    (string
+     data)))
 
 (defun octets<- (data)
-  (cond ((and (typep data 'integer)
-              (= data 0))
-         (hex->octets "00"))
-        ((typep data 'integer)
-         (int->octets data))
-        ((typep data 'bit-vector)
-         (bits->octets data))
-        ((or (typep data '(vector (unsigned-byte 8)))
-             (typep data '(simple-array (unsigned-byte 8) (*))))
-         data)
-        ((typep data 'string)
-         (hex->octets data))
-        (t (error "Type of value N not recognized."))))
+  (etypecase data
+    ((integer 0 0)
+     (hex->octets "00"))
+    (integer
+     (int->octets data))
+    (bit-vector
+     (bits->octets data))
+    ((or (vector (unsigned-byte 8))
+         (simple-array (unsigned-byte 8) (*)))
+     data)
+    (string
+     (hex->octets data))))
 
 (defun int<- (data)
-  (cond ((typep data 'integer)
-         data)
-        ((typep data 'bit-vector)
-         (bits->int data))
-        ((or (typep data '(vector (unsigned-byte 8)))
-             (typep data '(simple-array (unsigned-byte 8) (*))))
-         (octets->int data))
-        ((typep data 'string)
-         (hex->int data))
-        (t (error "Type of value N not recognized."))))
+  (etypecase data
+    (integer
+     data)
+    (bit-vector
+     (bits->int data))
+    ((or (vector (unsigned-byte 8))
+         (simple-array (unsigned-byte 8) (*)))
+     (octets->int data))
+    (string
+     (hex->int data))))
 
 (defun bits<- (data)
-  (cond ((and (typep data 'integer)
-              (= data 0))
-         (hex->bits "00"))
-        ((typep data 'integer)
-         (int->bits data))
-        ((typep data 'bit-vector)
-         data)
-        ((or (typep data '(vector (unsigned-byte 8)))
-             (typep data '(simple-array (unsigned-byte 8) (*))))
-         (octets->bits data))
-        ((typep data 'string)
-         (hex->bits data))
-        (t (error "Type of value N not recognized."))))
+  (etypecase data
+    ((integer 0 0)
+     (hex->bits "00"))
+    (integer
+     (int->bits data))
+    (bit-vector
+     data)
+    ((or (vector (unsigned-byte 8))
+         (simple-array (unsigned-byte 8) (*)))
+     (octets->bits data))
+    (string
+     (hex->bits data))))
 
 ;; EOF
