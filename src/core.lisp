@@ -23,33 +23,30 @@
                     #*1110
                     #*1111))
 
-(declaim (ftype (function ((member #\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9
-                                   #\a #\b #\c #\d #\e #\f
-                                   #\A #\B #\C #\D #\E #\F))
-                          (simple-bit-vector 4))
-                hex-to-bit-lookup/unsafe))
+(deftype hex-char ()
+  `(member #\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9
+           #\a #\b #\c #\d #\e #\f
+           #\A #\B #\C #\D #\E #\F))
+
+(declaim (ftype (function (hex-char) (integer 0 16)) hexchar->int)
+         (inline hexchar->int))
+(defun hexchar->int (char)
+  "Return the bit vector associated with a hex-value character CHAR from *bit-map*."
+  (declare (optimize (speed 2) (safety 0)))
+  (cond ((char<= #\0 char #\9) (- (char-code char) #.(char-code #\0)))
+        ((char<= #\a char #\f) (- (char-code char) #.(- (char-code #\a) 10)))
+        (t                     (- (char-code char) #.(- (char-code #\A) 10))
+         ;; always return these results
+         #+nil (char<= #\A char #\F))))
+
+(declaim (ftype (function (hex-char) (simple-bit-vector 4)) hex-to-bit-lookup/unsafe))
 (defun hex-to-bit-lookup/unsafe (char)
   "Return the bit vector associated with a hex-value character CHAR from *bit-map*."
   (declare (optimize (speed 2) (safety 0)))
-  (cond ((char<= #\0 char #\9)
-         (aref *bit-map* (- (char-code char) #.(char-code #\0))))
-        ((char<= #\a char #\f)
-         (aref *bit-map* (- (char-code char) #.(- (char-code #\a) 10))))
-        (t
-         ;; always return these results
-         #+nil (char<= #\A char #\F)
-         (aref *bit-map* (- (char-code char) #.(- (char-code #\A) 10))))))
+  (aref *bit-map* (hexchar->int char)))
 
 (defun hex-to-bit-lookup (char)
   "Return the bit vector associated with a hex-value character CHAR from *bit-map*."
   (declare (optimize (speed 2) (safety 0)))
   (copy-seq (hex-to-bit-lookup/unsafe char)))
-
-;; from comp.lang.lisp
-(defun bit-vector-integer-value-and-place (bit-vector)
-  "Returns the bits of BIT-VECTOR as an integer as the primary value, number of bits as the secondary value.
-SLOW!! Consult Hackers-Delight"
-  (let ((place -1))
-    (values (reduce #'+ (reverse bit-vector) :key (lambda (digit) (ash digit (incf place))))
-            (incf place))))
 

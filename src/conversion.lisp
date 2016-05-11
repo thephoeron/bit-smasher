@@ -19,12 +19,21 @@
 
 (defun hex->bits (x)
   "Return the bit-vector for hexadecimal string X."
-  (let ((binlist (loop for c across x collect (hex-to-bit-lookup/unsafe c))))
-    (apply #'concatenate 'bit-vector binlist)))
+  (let ((result (make-array (* 4 (length x)) :element-type 'bit)))
+    (declare (type (simple-array bit) result)
+             (type string x))
+    (loop for c across x
+          for i from 0 by 4
+          for bv = (hex-to-bit-lookup/unsafe c)
+          do
+       (locally
+           (declare (optimize (safety 0)))
+         (replace result bv :start1 i)))
+    result))
 
 (defun hex->octets (x)
   "Return the octet-vector for hexadecimal string X."
-  (ironclad:hex-string-to-byte-array x))
+  (hex-string-to-byte-array x))
 
 (defun hex->int (x)
   "Return the integer value for hexadecimal string X."
@@ -32,11 +41,11 @@
 
 (defun octets->hex (o)
   "Return the hexadecimal string for octet-vector O."
-  (ironclad:byte-array-to-hex-string o))
+  (byte-array-to-hex-string o))
 
 (defun octets->int (o)
   "Return the integer value for octet-vector O."
-  (ironclad:octets-to-integer o))
+  (octets-to-integer o))
 
 (defun octets->bits (o)
   "Return the bit-vector for octet-vector O."
@@ -44,7 +53,7 @@
 
 (defun int->octets (n)
   "Return the octet-vector for integer N."
-  (ironclad:integer-to-octets n))
+  (integer-to-octets n))
 
 (defun int->hex (n)
   "Return the hexadecimal string for integer N."
@@ -64,7 +73,7 @@
 
 (defun bits->octets (data)
   "Return the octet-vector for bit-vector DATA."
-  (ironclad:integer-to-octets (bits->int data)))
+  (integer-to-octets (bits->int data)))
 
 ;;;; generalized
 

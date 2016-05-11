@@ -7,7 +7,7 @@
 
 (defpackage #:bit-smasher
   (:nicknames #:bitsmash)
-  (:use :cl :cl-user :ironclad)
+  (:use :cl :cl-user)
   (:shadowing-import-from :cl-user #:null)
   (:export #:*bit-smasher-version*
            #:hex<- #:hex->bits #:hex->octets #:hex->int
