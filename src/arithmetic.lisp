@@ -68,4 +68,3 @@
     (string
      (bits<- (ash (int<- n) (- count))))))
 
-;; EOF

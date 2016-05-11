@@ -119,4 +119,3 @@
     (string
      (hex->bits data))))
 
-;; EOF

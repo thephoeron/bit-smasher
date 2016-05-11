@@ -19,6 +19,7 @@
   :version #.*bit-smasher-version*
   :author "\"the Phoeron\" Colin J.E. Lupton <sysop@thephoeron.com>"
   :license "MIT"
+  :pathname "src/"
   :depends-on (:cl-base58
                :cl-base64
                :ironclad)
@@ -27,5 +28,5 @@
                (:file "conversion")
                (:file "arithmetic")
                (:file "aliases")
-               (:file "utils")))
-;; EOF
+               (:file "utils"))
+  :in-order-to ((test-op (test-op :bit-smasher-test))))

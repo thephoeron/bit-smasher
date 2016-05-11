@@ -28,4 +28,3 @@
 
 (defparameter *bit-smasher-version* #.bit-smasher-asd:*bit-smasher-version*)
 
-;; EOF

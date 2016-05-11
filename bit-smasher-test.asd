@@ -23,4 +23,3 @@
                     (funcall (intern #.(string :run-test-system) :prove-asdf) c)
                     (asdf:clear-system c)))
 
-;; EOF
