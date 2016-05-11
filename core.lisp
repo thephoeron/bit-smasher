@@ -5,6 +5,7 @@
 
 (in-package :bit-smasher)
 
+(declaim (type (simple-array (simple-bit-vector 4) (16)) *bit-map*))
 (defvar *bit-map* #(#*0000
                     #*0001
                     #*0010
@@ -22,13 +23,20 @@
                     #*1110
                     #*1111))
 
+(declaim (ftype (function ((member #\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9
+                                   #\a #\b #\c #\d #\e #\f
+                                   #\A #\B #\C #\D #\E #\F))
+                          (simple-bit-vector 4))
+                hex-to-bit-lookup/unsafe))
 (defun hex-to-bit-lookup/unsafe (char)
   "Return the bit vector associated with a hex-value character CHAR from *bit-map*."
   (cond ((char<= #\0 char #\9)
          (aref *bit-map* (- (char-code char) #.(char-code #\0))))
         ((char<= #\a char #\f)
          (aref *bit-map* (- (char-code char) #.(- (char-code #\a) 10))))
-        ((char<= #\A char #\F)
+        (t
+         ;; always return these results
+         #+nil (char<= #\A char #\F)
          (aref *bit-map* (- (char-code char) #.(- (char-code #\A) 10))))))
 
 (defun hex-to-bit-lookup (char)
