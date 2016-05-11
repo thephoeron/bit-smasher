@@ -17,7 +17,7 @@ hexadecimal digits into a byte array."
                       (hexchar->int (char string (1+ j)))))
           finally (return key))))
 
-(defun byte-array-to-hex-string (vector &aux (start 0) (end (length vector)) (element-type 'base-char))
+(defun byte-array-to-hex-string (vector &aux (start 0) (end (length vector)))
   "Return a string containing the hexadecimal representation of the
 subsequence of VECTOR between START and END.  ELEMENT-TYPE controls
 the element-type of the returned string."
@@ -25,12 +25,7 @@ the element-type of the returned string."
            (optimize (speed 3) (safety 1)))
   (let* ((length (- end start))
          (hexdigits #.(coerce "0123456789abcdef" 'simple-base-string)))
-    (loop with string = (ecase element-type
-                          ;; so that the compiler optimization can jump in
-                          (base-char (make-string (* length 2)
-                                                  :element-type 'base-char))
-                          (character (make-string (* length 2)
-                                                  :element-type 'character)))
+    (loop with string = (make-string (* length 2) :element-type 'base-char)
        for i from start below end
        for j from 0 below (* length 2) by 2
        do (let ((byte (aref vector i)))
