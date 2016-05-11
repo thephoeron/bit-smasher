@@ -27,9 +27,9 @@
   (cond ((char<= #\0 char #\9)
          (aref *bit-map* (- (char-code char) #.(char-code #\0))))
         ((char<= #\a char #\f)
-         (aref *bit-map* (+ 10 (- (char-code char) #.(char-code #\a)))))
+         (aref *bit-map* (- (char-code char) #.(- (char-code #\a) 10))))
         ((char<= #\A char #\F)
-         (aref *bit-map* (+ 10 (- (char-code char) #.(char-code #\A)))))))
+         (aref *bit-map* (- (char-code char) #.(- (char-code #\A) 10))))))
 
 (defun hex-to-bit-lookup (char)
   "Return the bit vector associated with a hex-value character CHAR from *bit-map*."
