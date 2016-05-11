@@ -30,6 +30,7 @@
                 hex-to-bit-lookup/unsafe))
 (defun hex-to-bit-lookup/unsafe (char)
   "Return the bit vector associated with a hex-value character CHAR from *bit-map*."
+  (declare (optimize (speed 2) (safety 0)))
   (cond ((char<= #\0 char #\9)
          (aref *bit-map* (- (char-code char) #.(char-code #\0))))
         ((char<= #\a char #\f)
@@ -41,6 +42,7 @@
 
 (defun hex-to-bit-lookup (char)
   "Return the bit vector associated with a hex-value character CHAR from *bit-map*."
+  (declare (optimize (speed 2) (safety 0)))
   (copy-seq (hex-to-bit-lookup/unsafe char)))
 
 ;; from comp.lang.lisp
