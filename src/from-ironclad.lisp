@@ -4,18 +4,18 @@
   "Parses a substring of STRING delimited by START and END of
 hexadecimal digits into a byte array."
   (declare (type string string))
-  (let* ((length (/ (- end start) 2))
+  (declare (optimize (speed 3) (safety 1)))
+  (let* ((length
+          (ash (- end start) -1)
+           #+nil (/ (- end start) 2))
          (key (make-array length :element-type '(unsigned-byte 8))))
     (declare (type (simple-array (unsigned-byte 8) (*)) key))
-    (flet ((char-to-digit (char)
-             (or (position char "0123456789abcdef" :test #'char-equal)
-                 (error "~A is not a hex digit" char))))
-      (loop for i from 0
-            for j from start below end by 2
-            do (setf (aref key i)
-                     (+ (* (char-to-digit (char string j)) 16)
-                        (char-to-digit (char string (1+ j)))))
-         finally (return key)))))
+    (loop for i from 0
+          for j from start below end by 2
+          do (setf (aref key i)
+                   (+ (* (hexchar->int (char string j)) 16)
+                      (hexchar->int (char string (1+ j)))))
+          finally (return key))))
 
 (defun byte-array-to-hex-string (vector &aux (start 0) (end (length vector)) (element-type 'base-char))
   "Return a string containing the hexadecimal representation of the
