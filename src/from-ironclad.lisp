@@ -22,8 +22,6 @@ hexadecimal digits into a byte array."
 subsequence of VECTOR between START and END.  ELEMENT-TYPE controls
 the element-type of the returned string."
   (declare (type (vector (unsigned-byte 8)) vector)
-           (type fixnum start)
-           (type (or cl:null fixnum) end)
            (optimize (speed 3) (safety 1)))
   (let* ((length (- end start))
          (hexdigits #.(coerce "0123456789abcdef" 'simple-base-string)))
