@@ -25,6 +25,7 @@
                :ironclad)
   :components ((:file "packages")
                (:file "core")
+               (:file "from-ironclad")
                (:file "conversion")
                (:file "arithmetic")
                (:file "aliases")
