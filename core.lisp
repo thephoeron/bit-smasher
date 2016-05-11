@@ -47,7 +47,8 @@
 
 ;; from comp.lang.lisp
 (defun bit-vector-integer-value-and-place (bit-vector)
-  "Returns the bits of BIT-VECTOR as an integer as the primary value, number of bits as the secondary value."
+  "Returns the bits of BIT-VECTOR as an integer as the primary value, number of bits as the secondary value.
+SLOW!! Consult Hackers-Delight"
   (let ((place -1))
     (values (reduce #'+ (reverse bit-vector) :key (lambda (digit) (ash digit (incf place))))
             (incf place))))
