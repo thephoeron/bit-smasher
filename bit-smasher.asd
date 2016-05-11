@@ -27,5 +27,6 @@
                (:file "conversion")
                (:file "arithmetic")
                (:file "aliases")
-               (:file "utils")))
+               (:file "utils"))
+  :in-order-to ((test-op (test-op :bit-smasher-test))))
 ;; EOF
