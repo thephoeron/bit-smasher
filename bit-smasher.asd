@@ -21,8 +21,7 @@
   :license "MIT"
   :pathname "src/"
   :depends-on (:cl-base58
-               :cl-base64
-               :ironclad)
+               :cl-base64)
   :components ((:file "packages")
                (:file "core")
                (:file "from-ironclad")
