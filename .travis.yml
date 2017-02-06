@@ -1,6 +1,9 @@
-language: common-lisp
-
+language: lisp
 sudo: required
+addons:
+  apt:
+    packages:
+      - ca-certificates
 
 env:
   matrix:
