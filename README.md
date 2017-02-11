@@ -1,6 +1,7 @@
 # BIT-SMASHER
 
-[![Build Status](https://travis-ci.org/thephoeron/bit-smasher.svg?branch=master)](https://travis-ci.org/thephoeron/bit-smasher)
+[![CircleCI](https://circleci.com/gh/thephoeron/bit-smasher.svg?style=shield)](https://circleci.com/gh/thephoeron/bit-smasher)
+[![Travis CI](https://travis-ci.org/thephoeron/bit-smasher.svg?branch=master)](https://travis-ci.org/thephoeron/bit-smasher)
 [![Coverage Status](https://coveralls.io/repos/thephoeron/bit-smasher/badge.svg?branch=master)](https://coveralls.io/r/thephoeron/bit-smasher?branch=master)
 [![Quicklisp](http://quickdocs.org/badge/bit-smasher.svg)](http://quickdocs.org/bit-smasher/)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
