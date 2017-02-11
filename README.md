@@ -10,7 +10,7 @@ Common Lisp library for handling bit vectors, bit vector arithmetic, and type co
 
 Available in Quicklisp as of July 2014 release.
 
-Documentation available at: http://thephoeron.viewdocs.io/bit-smasher/
+Documentation available at: https://thephoeron.github.io/bit-smasher/
 
 ### Supported Platforms
 
@@ -96,4 +96,4 @@ In addition to the built-in CL predicate function, `bit-vector-p`, BIT-SMASHER a
 
 ### License
 
-Copyright &copy; 2014&ndash;2015, "the Phoeron" Colin J.E. Lupton. This project is released under the MIT License; please see `bit-smasher/LICENSE` for more information.
+Copyright &copy; 2014&ndash;2017, "the Phoeron" Colin J.E. Lupton and the Contributors. This project is released under the MIT License; please see `bit-smasher/LICENSE` for more information.
