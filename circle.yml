@@ -1,18 +1,18 @@
 machine:
   environment:
-    PATH: ~/.roswell/bin:$PATH
+    PATH: $HOME/.roswell/bin:$PATH
     LISP: sbcl-bin
     COVERALLS: true
 
 general:
-  build_dir: ~/lisp/bit-smasher
+  build_dir: $HOME/lisp/bit-smasher
 
 dependencies:
   pre:
     - curl -L https://raw.githubusercontent.com/roswell/roswell/release/scripts/install-for-ci.sh | sh
     - ros --version
   override:
-    - git clone https://github.com/fukamachi/cl-coveralls ~/lisp/cl-coveralls
+    - git clone https://github.com/fukamachi/cl-coveralls $HOME/lisp/cl-coveralls
     - ros install prove
     - which run-prove
 
