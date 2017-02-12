@@ -16,8 +16,7 @@ test:
     LISP: sbcl-bin
     COVERALLS: true
   override:
-    - run-prove bit-smasher.asd bit-smasher-test.asd:
-      parallel: true
+    - run-prove bit-smasher.asd bit-smasher-test.asd: {parallel: true}
 
 notify:
   webhooks:
