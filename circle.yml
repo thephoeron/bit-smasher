@@ -1,15 +1,9 @@
 machine:
   environment:
     PATH: ~/.roswell/bin:$PATH
-    LD_LIBRARY_PATH: $HOME/libuv/lib:$LD_LIBRARY_PATH
-    C_INCLUDE_PATH: $HOME/libuv/include:$C_INCLUDE_PATH
 
 dependencies:
   pre:
-    - if ! [ -f "$HOME/libuv/include/uv.h" ]; then
-        curl -L https://github.com/libuv/libuv/archive/v1.6.1.tar.gz | tar xzf -;
-        (cd libuv-1.6.1 && ./autogen.sh && ./configure --prefix=$HOME/libuv && make && make install);
-      fi
     - curl -L https://raw.githubusercontent.com/snmsts/roswell/release/scripts/install-for-ci.sh | sh
     - case $CIRCLE_NODE_INDEX in
         0) ros config set default.lisp sbcl-bin ;;
@@ -37,8 +31,8 @@ dependencies:
 test:
   override:
     - if [ "$CIRCLE_NODE_INDEX" = 0 ]; then COVERALLS=true run-prove bit-smasher-test.asd; else run-prove bit-smasher-test.asd; fi: {parallel: true}
+
 notify:
   webhooks:
-    # A list of hook hashes, containing the url field
     # gitter hook
     - url: https://webhooks.gitter.im/e/62d9fa2ca4dd993fb01c
