@@ -1,6 +1,11 @@
 machine:
   environment:
     PATH: ~/.roswell/bin:$PATH
+    LISP: sbcl-bin
+    COVERALLS: true
+
+general:
+  build_dir: ~/lisp/bit-smasher
 
 dependencies:
   pre:
@@ -12,9 +17,6 @@ dependencies:
     - which run-prove
 
 test:
-  environment:
-    LISP: sbcl-bin
-    COVERALLS: true
   override:
     - run-prove bit-smasher.asd bit-smasher-test.asd: {parallel: true}
 
