@@ -11,13 +11,13 @@ dependencies:
     - ros install prove
     - which run-prove
 
-sbcl:
-  test:
-    environment:
-      LISP: sbcl-bin
-      COVERALLS: true
-    override:
-      - run-prove bit-smasher.asd bit-smasher-test.asd {parallel: true}
+test:
+  environment:
+    LISP: sbcl-bin
+    COVERALLS: true
+  override:
+    - run-prove bit-smasher.asd bit-smasher-test.asd:
+      parallel: true
 
 notify:
   webhooks:
