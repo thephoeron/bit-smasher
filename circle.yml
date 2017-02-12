@@ -4,33 +4,20 @@ machine:
 
 dependencies:
   pre:
-    - curl -L https://raw.githubusercontent.com/snmsts/roswell/release/scripts/install-for-ci.sh | sh
-    - case $CIRCLE_NODE_INDEX in
-        0) ros config set default.lisp sbcl-bin ;;
-        1) ros install ccl-bin;
-           ros config set default.lisp ccl-bin ;;
-        2) ros install allegro;
-           ros config set default.lisp allegro ;;
-        3) ros install clisp;
-           ros config set default.lisp clisp ;;
-        4) ros install abcl;
-           ros config set default.lisp abcl ;;
-        5) ros install ecl;
-           ros config set default.lisp ecl ;;
-        6) ros install cmu-bin;
-           ros config set default.lisp cmu-bin ;;
-        7) ros install clasp;
-           ros config set default.lisp clasp ;;
-      esac
-    - ros run -- --version
+    - curl -L https://raw.githubusercontent.com/roswell/roswell/release/scripts/install-for-ci.sh | sh
+    - ros --version
   override:
     - git clone https://github.com/fukamachi/cl-coveralls ~/lisp/cl-coveralls
-    - git clone https://github.com/fukamachi/prove ~/lisp/prove
-    - ros -l ~/lisp/prove/prove.asd install prove
+    - ros install prove
+    - which run-prove
 
-test:
-  override:
-    - if [ "$CIRCLE_NODE_INDEX" = 0 ]; then COVERALLS=true run-prove bit-smasher-test.asd; else run-prove bit-smasher-test.asd; fi: {parallel: true}
+sbcl:
+  test:
+    environment:
+      LISP: sbcl-bin
+      COVERALLS: true
+    override:
+      - run-prove bit-smasher.asd bit-smasher-test.asd {parallel: true}
 
 notify:
   webhooks:
