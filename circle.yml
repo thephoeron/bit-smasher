@@ -5,7 +5,7 @@ machine:
     COVERALLS: true
 
 general:
-  build_dir: $HOME/lisp/bit-smasher
+  build_dir: lisp/bit-smasher
 
 dependencies:
   pre:
