@@ -10,7 +10,9 @@
   "Returns the bits of BIT-VECTOR as an integer as the primary value, number of bits as the secondary value.
 SLOW!! Consult Hackers-Delight"
   (let ((place -1))
-    (values (reduce #'+ (reverse bit-vector) :key (lambda (digit) (ash digit (incf place))))
+    (values (reduce #'+ bit-vector
+                    :key (lambda (digit) (ash digit (incf place)))
+                    :from-end t)
             (incf place))))
 
 (defun bit-sum (&rest rest)
