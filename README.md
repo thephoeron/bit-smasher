@@ -1,13 +1,13 @@
 # BIT-SMASHER
 
-[![Quicklisp](http://quickdocs.org/badge/bit-smasher.svg)](http://quickdocs.org/bit-smasher/)
+[![Quicklisp](https://quickdocs.org/badge/bit-smasher.svg)](https://quickdocs.org/bit-smasher/)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 Common Lisp library for handling bit vectors, bit vector arithmetic, and type conversions.
 
 Available in Quicklisp as of July 2014 release.
 
-Documentation available at: https://thephoeron.github.io/bit-smasher/
+Documentation available at: https://thephoeron.common-lisp.dev/bit-smasher/
 
 ### Supported Platforms
 
