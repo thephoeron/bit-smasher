@@ -1,6 +1,6 @@
-;;;; packages.lisp
+;;;; src/packages.lisp
 
-;;;; Copyright (c) 2014--2015, "the Phoeron" Colin J.E. Lupton <//thephoeron.com>
+;;;; Copyright (c) 2014--2022, "the Phoeron" Colin J.E. Lupton <thephoeron@protonmail.com>
 ;;;; See LICENSE for additional information.
 
 (in-package :cl-user)
@@ -9,8 +9,7 @@
   (:nicknames #:bitsmash)
   (:use :cl :cl-user)
   (:shadowing-import-from :cl-user #:null)
-  (:export #:*bit-smasher-version*
-           #:hex<- #:hex->bits #:hex->octets #:hex->int
+  (:export #:hex<- #:hex->bits #:hex->octets #:hex->int
            #:octets<- #:octets->hex #:octets->bits #:octets->int
            #:int<- #:int->hex #:int->octets #:int->bits
            #:bits<- #:bits->hex #:bits->octets #:bits->int
@@ -23,8 +22,3 @@
            #:>> #:rshift
            #:byte-length #:wide-bit-length #:min-bit-length
            #:twos-complement-p))
-
-(in-package :bit-smasher)
-
-(defparameter *bit-smasher-version* #.bit-smasher-asd:*bit-smasher-version*)
-

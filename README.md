@@ -14,12 +14,15 @@ Documentation available at: https://thephoeron.common-lisp.dev/bit-smasher/
 The current release of BIT-SMASHER *compiles without warning* and passes all
 tests on 64-bit versions of the following Lisp implementations:
 
-- LispWorks 8.0.1
 - SBCL 2.2.5
 - Clozure CL 1.12.1
 - CLISP 2.49.92
 - ABCL 1.9.0
 - Allegro CL 10.1
+
+It *compiles with warnings* on:
+
+- LispWorks 8.0.1
 
 It *compiles with style-warnings* on:
 
