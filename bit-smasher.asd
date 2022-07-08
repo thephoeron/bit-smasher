@@ -17,7 +17,7 @@
   :homepage "https://thephoeron.common-lisp.dev/bit-smasher/"
   :source-control (:git "https://gitlab.common-lisp.net/thephoeron/bit-smasher/")
   :bug-tracker "https://gitlab.common-lisp.net/thephoeron/bit-smasher/-/issues/"
-  :version (:from-file-form "VERSION")
+  :version (:read-file-form "VERSION")
   :license "MIT"
   :pathname "src/"
   :serial t
